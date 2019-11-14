@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">EspressoActivity</string>
+    <string name="user_input_text">Enter Text Here</string>
+    <string name="submit_text">SUBMIT</string>
+</resources>
