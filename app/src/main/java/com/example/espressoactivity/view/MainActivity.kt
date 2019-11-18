@@ -23,13 +23,17 @@ class MainActivity : AppCompatActivity(), MainInterface.View {
         displayView = findViewById(R.id.display_view_text_view)
         userInputView = findViewById(R.id.user_input_edit_text)
         submitButton = findViewById(R.id.submit_button)
-        presenter = MainActivity(this)
+        presenter = MainActivityPresenter(this)
     }
 
     override fun initView() {
-displayView.text = presenter    }
+        displayView.text = presenter?.getUserString().toString()
+        submitButton.setOnClickListener {
+            presenter?.changePreviousString(userInputView.text.toString())
+        }
+    }
 
     override fun updateViewData() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        displayView.text = presenter?.getUserString()
     }
 }

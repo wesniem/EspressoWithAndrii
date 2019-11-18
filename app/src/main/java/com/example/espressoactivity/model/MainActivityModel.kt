@@ -3,11 +3,12 @@ package com.example.espressoactivity.model
 import com.example.espressoactivity.MainInterface.MainInterface
 
 class MainActivityModel: MainInterface.Model {
-    private var userString = ""
-    override fun updateString() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+    private var userString: String = ""
+
+    override fun updateString(string: String) {
+        userString = string
     }
 
     override fun getUserString() = userString
-
 }

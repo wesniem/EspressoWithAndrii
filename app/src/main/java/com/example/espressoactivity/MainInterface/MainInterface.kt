@@ -7,12 +7,12 @@ interface MainInterface {
     }
 
     interface Presenter {
-        fun changePreviousString()
-        fun getUserString()
+        fun changePreviousString(string: String)
+        fun getUserString(): String
     }
 
     interface Model {
-        fun updateString()
-        fun getUserString()
+        fun updateString(string: String)
+        fun getUserString(): String
     }
 }
