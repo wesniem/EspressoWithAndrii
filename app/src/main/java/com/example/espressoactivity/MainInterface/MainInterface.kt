@@ -1,18 +1,15 @@
 package com.example.espressoactivity.MainInterface
 
+import com.example.espressoactivity.utils.IObservable
+
 interface MainInterface {
     interface View {
-        fun initView()
-        fun updateViewData()
+        fun setText(text: String)
+        fun whenStringSubmitted(): IObservable<String>
     }
 
-    interface Presenter {
-        fun changePreviousString(string: String)
-        fun getUserString(): String
-    }
-
+    interface Presenter
     interface Model {
         fun updateString(string: String)
-        fun getUserString(): String
     }
 }

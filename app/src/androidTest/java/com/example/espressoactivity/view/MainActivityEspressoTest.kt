@@ -1,6 +1,5 @@
 package com.example.espressoactivity.view
 
-import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -11,7 +10,6 @@ import androidx.test.runner.AndroidJUnit4
 import com.example.espressoactivity.R
 import org.hamcrest.CoreMatchers.containsString
 import org.junit.Rule
-
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -27,11 +25,20 @@ val activityRule = ActivityTestRule(MainActivity::class.java)
     }
 
     @Test fun checkTextIsVisibleOnButtonClick() {
+
         onView(withId(R.id.user_input_edit_text))
-            .perform(typeText("Hello"), click())
+            .perform(typeText(NON_EMPTY_STRING), closeSoftKeyboard())
+
+        onView(withId(R.id.submit_button))
+            .perform(click())
 
         onView(withId(R.id.display_view_text_view))
-            .check(matches(withText(containsString("Hello"))))
+            .check(matches(withText(containsString(NON_EMPTY_STRING))))
 
     }
+
+    companion object {
+        private const val NON_EMPTY_STRING = "NON_EMPTY_STRING"
+    }
+
 }
