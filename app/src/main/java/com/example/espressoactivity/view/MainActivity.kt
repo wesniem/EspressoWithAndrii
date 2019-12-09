@@ -11,6 +11,7 @@ import com.example.espressoactivity.model.MainActivityModel
 import com.example.espressoactivity.presenter.MainActivityPresenter
 import com.example.espressoactivity.utils.IObservable
 import com.example.espressoactivity.utils.Observable
+import rx.subjects.PublishSubject
 
 class MainActivity : AppCompatActivity(), MainInterface.View {
 
@@ -24,6 +25,8 @@ class MainActivity : AppCompatActivity(), MainInterface.View {
 
     private val whenStringSubmitted = Observable("")
 
+//    private lateinit var publishSubject: PublishSubject<String>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,7 +35,12 @@ class MainActivity : AppCompatActivity(), MainInterface.View {
         submitButton = findViewById(R.id.submit_button)
         presenter = MainActivityPresenter(this, MainActivityModel())
         submitButton.setOnClickListener {
-            whenStringSubmitted.pushValue(userInputView.text.toString())
+            val subject = PublishSubject.create<String>()
+
+            subject.map { whenStringSubmitted.pushValue(userInputView.text.toString()) }.subscribe()
+            subject.onNext(userInputView.text.toString())
+            subject.hasCompleted()
+//            whenStringSubmitted.pushValue(userInputView.text.toString())
         }
     }
 
@@ -40,7 +48,7 @@ class MainActivity : AppCompatActivity(), MainInterface.View {
         displayView.text = text
     }
 
-    override fun whenStringSubmitted(): IObservable<String> {
+    override fun whenStringSubmitted(): Observable<String> {
        return whenStringSubmitted
     }
 
